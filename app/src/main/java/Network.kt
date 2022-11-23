@@ -49,7 +49,46 @@ fun getPicture(activity : Activity, callback: (url:String) -> Unit) {
     )
 }
 
+fun getInfo(activity : Activity, callback: (url:String) -> Unit) {
+    val queryUrl = "https://api.nasa.gov/planetary/apod?api_key=B4YYn2gIDEHMpsVS35Pam40CHktjee9oj3ZbJuEN"
 
+
+    val client = OkHttpClient()
+    val request = Request.Builder()
+        .url(queryUrl)
+        .get()
+        .build()
+
+    client.newCall(request).enqueue(object : okhttp3.Callback {
+        override fun onFailure(call: okhttp3.Call, e: IOException) {
+            e.printStackTrace()
+        }
+
+        override fun onResponse(call: okhttp3.Call, response: Response) {
+            if (!response.isSuccessful) {
+                throw IOException("Unexpected code $response")
+            } else {
+                val body = response.body
+
+                val moshi: Moshi = Moshi.Builder()
+                    .addLast(KotlinJsonAdapterFactory())
+                    .build()
+
+                val queryAdapter = moshi.adapter(QueryPic::class.java)
+
+                val url = queryAdapter.fromJson(response.body?.string()!!)!!.title
+
+                activity.runOnUiThread{
+                    callback(url)
+                }
+
+
+            }
+        }
+
+    }
+    )
+}
 //fun postNotes(title: String, body : String, poster : String) {
 //    val client = OkHttpClient()
 //
