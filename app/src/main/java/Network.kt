@@ -1,14 +1,11 @@
 import android.app.Activity
-import com.squareup.moshi.JsonAdapter
+import com.example.aether.HomeFragment
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.*
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
 
-fun getPicture(activity : Activity, callback: (url:String) -> Unit) {
+fun getPicture(activity: Activity, callback: (url:String) -> Unit) {
     val queryUrl = "https://api.nasa.gov/planetary/apod?api_key=B4YYn2gIDEHMpsVS35Pam40CHktjee9oj3ZbJuEN"
 
 
@@ -49,7 +46,7 @@ fun getPicture(activity : Activity, callback: (url:String) -> Unit) {
     )
 }
 
-fun getInfo(activity : Activity, callback: (url:String) -> Unit) {
+fun getInfo(activity: Activity, callback: (url:String) -> Unit) {
     val queryUrl = "https://api.nasa.gov/planetary/apod?api_key=B4YYn2gIDEHMpsVS35Pam40CHktjee9oj3ZbJuEN"
 
 

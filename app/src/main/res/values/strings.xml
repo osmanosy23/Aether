@@ -2,4 +2,6 @@
     <string name="app_name">Aether</string>
     <string name="picofday">Picture of the Day</string>
     <string name="pictitle">Title Loading...</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
