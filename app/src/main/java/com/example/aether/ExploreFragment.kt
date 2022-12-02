@@ -29,6 +29,8 @@ class ExploreFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var myAdapter: NewsAdapter
+    val categoryRVModalArrayList : MutableList<CategoryModel> = ArrayList<CategoryModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -60,9 +62,23 @@ class ExploreFragment : Fragment() {
             }
 
             (recyclerView.adapter as NewsAdapter).updateData(newsList)
+
+            val categoryRV :RecyclerView = view.findViewById(R.id.tabRecycler)
+            val categoryRVModelArrayList : MutableList<CategoryModel> = ArrayList<CategoryModel>()
+            val categoryRVAdapter = context?.let { TabAdapter(categoryRVModalArrayList, it) }
+            categoryRVModelArrayList.add(CategoryModel("News",(getString(R.string.newspic))))
+            categoryRVModelArrayList.add(CategoryModel("Podcasts",(getString(R.string.podcastpic))))
+            categoryRVModelArrayList.add(CategoryModel("Videos",(getString(R.string.videospic))))
+
+            categoryRV.adapter=categoryRVAdapter
+            categoryRVAdapter?.updateData(categoryRVModelArrayList)
+
+
         }
 
+
         return view
+
     }
 
 

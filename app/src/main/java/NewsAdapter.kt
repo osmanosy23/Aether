@@ -22,9 +22,7 @@ class NewsAdapter(
 ) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>(){
 
     class NewsViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView){
-//        val titleView : TextView = itemView.findViewById(R.id.mytitle2)
-//        val author : TextView = itemView.findViewById(R.id.myauthor2)
-//        val image : ImageView = itemView.findViewById(R.id.myimage2)
+
         val titleView : TextView = itemView.findViewById(R.id.articletitleText)
         val author : TextView = itemView.findViewById(R.id.articleauthorText)
         val date : TextView = itemView.findViewById(R.id.articledateText)
