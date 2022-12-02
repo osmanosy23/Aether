@@ -1,10 +1,18 @@
 package com.example.aether
 
+import ArticleQueryResult
+import News
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import NewsAdapter
+import android.util.Log
+import getNews
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,7 +28,7 @@ class ExploreFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    private lateinit var myAdapter: NewsAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -29,13 +37,34 @@ class ExploreFragment : Fragment() {
         }
     }
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_explore, container, false)
+        val view = inflater.inflate(R.layout.fragment_explore, container, false)
+        val recyclerView: RecyclerView = view.findViewById(R.id.newsRecycler)
+        recyclerView.adapter = NewsAdapter(mutableListOf(), requireActivity())
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        getNews(requireActivity()) { list ->
+            Log.d("key12", "erer")
+//            val news = News("Gf", "fg", "f", "g")
+            Log.d("key14", "erer")
+
+            val newsList = list.map {
+//                News(it.title, "Authory McAuthor", it.url, it.urlToImage ?: "")
+                News(it.title?:"", it.author?:"", it.url?:"", it.publishedAt?:"",it.urlToImage ?: "")
+
+            }
+
+            (recyclerView.adapter as NewsAdapter).updateData(newsList)
+        }
+
+        return view
     }
+
 
     companion object {
         /**
@@ -48,7 +77,7 @@ class ExploreFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String="", param2: String="") =
+        fun newInstance(param1: String = "", param2: String = "") =
             ExploreFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)

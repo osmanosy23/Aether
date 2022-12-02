@@ -45,12 +45,15 @@ class HomeFragment : Fragment() {
         val pictitle : TextView = view.findViewById(R.id.titleTextView)
         activity?.let {
             getPicture(it) { myUrlArgument->
-                Glide
-                    .with(this)
-                    .load(myUrlArgument)
-                    .centerCrop()
-                    .placeholder(R.drawable.telescope_vec)
-                    .into(picofday)
+                try {
+                    Glide
+                        .with(this)
+                        .load(myUrlArgument)
+                        .centerCrop()
+                        .placeholder(R.drawable.telescope_vec)
+                        .into(picofday)
+                }
+                catch (_ : Exception) {}
             }
 
         }

@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonObjectRequest
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import getInfo
 
@@ -29,6 +31,8 @@ class MainActivity : AppCompatActivity() {
 //        getInfo(this) {myUrlArgument ->
 //            pictitle.text = myUrlArgument
 //        }
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragmentContainerView, HomeFragment.newInstance()).commit()
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.home_item-> {
