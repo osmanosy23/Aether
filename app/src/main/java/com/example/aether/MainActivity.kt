@@ -16,26 +16,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        val picofday : ImageView = findViewById(R.id.myImageView)
-//        val pictitle : TextView = findViewById(R.id.titleTextView)
-        val bottomNav : BottomNavigationView = findViewById(R.id.bottomNavigationView)
-//        getPicture(this) { myUrlArgument->
-//            Glide
-//                .with(this)
-//                .load(myUrlArgument)
-//                .centerCrop()
-//                .placeholder(R.drawable.telescope_vec)
-//                .into(picofday)
-//        }
 
-//        getInfo(this) {myUrlArgument ->
-//            pictitle.text = myUrlArgument
-//        }
+        val bottomNav: BottomNavigationView = findViewById(R.id.bottomNavigationView)
+
         supportFragmentManager.beginTransaction()
             .add(R.id.fragmentContainerView, HomeFragment.newInstance()).commit()
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.home_item-> {
+                R.id.home_item -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragmentContainerView, HomeFragment.newInstance())
                         .commit()

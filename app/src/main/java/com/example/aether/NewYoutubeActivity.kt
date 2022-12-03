@@ -9,47 +9,46 @@ import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
 import com.google.android.youtube.player.YouTubePlayerView
 
-class NewYoutubeActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListener,YouTubePlayer.PlaybackEventListener,
-YouTubePlayer.PlayerStateChangeListener{
-    val API_KEY : String ="AIzaSyBBsi3TEzPeDfw9NHkwOpNnynO-7YgFICs"
-    val VIDEO_ID : String = "nA9UZF-SZoQ"
-    private lateinit var  youtubePlayer: YouTubePlayerView
-    lateinit var  youtubePlayerInit : YouTubePlayer.OnInitializedListener
-//    val playerView : YouTubePlayerView = findViewById(R.id.playerview)
+class NewYoutubeActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListener,
+    YouTubePlayer.PlaybackEventListener,
+    YouTubePlayer.PlayerStateChangeListener {
+    val API_KEY: String = "AIzaSyBBsi3TEzPeDfw9NHkwOpNnynO-7YgFICs"
+    val VIDEO_ID: String = "nA9UZF-SZoQ"
+    private lateinit var youtubePlayer: YouTubePlayerView
+    lateinit var youtubePlayerInit: YouTubePlayer.OnInitializedListener
 
-    //    val VIDEO_ID : String =
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_youtube)
-        val youtubePlayer : YouTubePlayerView = findViewById(R.id.playerview)
-        val playBtn : Button = findViewById(R.id.btnPlay)
-
-//    playerView.initialize(API_KEY,this)
+        val youtubePlayer: YouTubePlayerView = findViewById(R.id.playerview)
+        val playBtn: Button = findViewById(R.id.btnPlay)
 
 
-    youtubePlayerInit = object : YouTubePlayer.OnInitializedListener {
-        override fun onInitializationSuccess(
-            p0: YouTubePlayer.Provider?,
-            p1: YouTubePlayer?,
-            p2: Boolean
-        ) {
-            if (p1 != null) {
-                p1.loadVideo(VIDEO_ID)
-//            playerView.initialize(API_KEY,onInitializationSuccess())
+
+        youtubePlayerInit = object : YouTubePlayer.OnInitializedListener {
+            override fun onInitializationSuccess(
+                p0: YouTubePlayer.Provider?,
+                p1: YouTubePlayer?,
+                p2: Boolean
+            ) {
+                if (p1 != null) {
+                    p1.loadVideo(VIDEO_ID)
+                }
+
             }
 
+            override fun onInitializationFailure(
+                p0: YouTubePlayer.Provider?,
+                p1: YouTubeInitializationResult?
+            ) {
+                Toast.makeText(applicationContext, "Failed", Toast.LENGTH_SHORT).show()
+            }
         }
-
-        override fun onInitializationFailure(
-            p0: YouTubePlayer.Provider?,
-            p1: YouTubeInitializationResult?
-        ) {
-            Toast.makeText(applicationContext, "Failed", Toast.LENGTH_SHORT).show()
+        playBtn.setOnClickListener {
+            youtubePlayer.initialize(API_KEY, youtubePlayerInit)
         }
     }
-    playBtn.setOnClickListener {
-        youtubePlayer.initialize(API_KEY,youtubePlayerInit)
-    }}
+
     override fun onPlaying() {
     }
 

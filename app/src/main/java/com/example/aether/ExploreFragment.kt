@@ -17,23 +17,18 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.FragmentContainer
 import androidx.fragment.app.FragmentContainerView
 import getNews
+import getNewsJWST
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ExploreFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class ExploreFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var myAdapter: NewsAdapter
-    val categoryRVModalArrayList : MutableList<CategoryModel> = ArrayList<CategoryModel>()
+    val categoryRVModalArrayList: MutableList<CategoryModel> = ArrayList<CategoryModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,30 +40,26 @@ class ExploreFragment : Fragment() {
 
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_explore, container, false)
 
         val intentLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
-        ){results ->
+        ) { results ->
 
         }
 
 
         val recyclerView: RecyclerView = view.findViewById(R.id.newsRecycler)
-        recyclerView.adapter = activity?.let { NewsAdapter(mutableListOf(), requireActivity(), intentLauncher) }
+        recyclerView.adapter =
+            activity?.let { NewsAdapter(mutableListOf(), requireActivity(), intentLauncher) }
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         getNews(requireActivity()) { list ->
-            Log.d("key12", "erer")
-//            val news = News("Gf", "fg", "f", "g")
-            Log.d("key14", "erer")
+
 
             val newsList = list.map {
-//                News(it.title, "Authory McAuthor", it.url, it.urlToImage ?: "")
                 News(
                     it.title ?: "",
                     it.author ?: "",
@@ -79,82 +70,92 @@ class ExploreFragment : Fragment() {
                 )
 
             }
-            (recyclerView.adapter as NewsAdapter).updateData(newsList)  }
+            (recyclerView.adapter as NewsAdapter).updateData(newsList)
+        }
         val intentLauncher2 = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
-        ){results ->
+        ) { results ->
 
         }
-            val categoryRV: RecyclerView = view.findViewById(R.id.tabRecycler)
-            val categoryRVModelArrayList: MutableList<CategoryModel> = ArrayList<CategoryModel>()
-            val categoryRVAdapter = context?.let { TabAdapter(categoryRVModalArrayList, it,intentLauncher2) }
-            categoryRVModelArrayList.add(CategoryModel("News", (getString(R.string.newspic))))
-            categoryRVModelArrayList.add(
-                CategoryModel(
-                    "Podcasts",
-                    (getString(R.string.podcastpic))
-                )
+        val categoryRV: RecyclerView = view.findViewById(R.id.tabRecycler)
+        val categoryRVModelArrayList: MutableList<CategoryModel> = ArrayList<CategoryModel>()
+        val categoryRVAdapter =
+            context?.let { TabAdapter(categoryRVModalArrayList, it, intentLauncher2) }
+        categoryRVModelArrayList.add(CategoryModel("Nasa News", (getString(R.string.newspic))))
+        categoryRVModelArrayList.add(
+            CategoryModel(
+                "JWST Updates", (getString(R.string.JWSTpic))
             )
-            categoryRVModelArrayList.add(CategoryModel("Nasa Live", (getString(R.string.videospic))))
+        )
+        categoryRVModelArrayList.add(CategoryModel("Nasa Live", (getString(R.string.videospic))))
 
-            categoryRV.adapter = categoryRVAdapter
-            categoryRVAdapter?.updateData(categoryRVModelArrayList)
-//        Log.d("keyf100", categoryRV.toString())
-        Log.d("keyf100","bruh")
+        categoryRV.adapter = categoryRVAdapter
+        categoryRVAdapter?.updateData(categoryRVModelArrayList)
+
 
         if (categoryRVAdapter != null) {
-            categoryRVAdapter.setOnItemClickListener (object : TabAdapter.onItemClickListener {
+            categoryRVAdapter.setOnItemClickListener(object : TabAdapter.onItemClickListener {
                 override fun onItemClick(position: Int) {
-                    Log.d("keyf100","tappingworks")
 
-                        if(position==0){
-                        Log.d("keyf100", "one")
-        val recyclerView: RecyclerView = view.findViewById(R.id.newsRecycler)
-        recyclerView.adapter = activity?.let { NewsAdapter(mutableListOf(), requireActivity(), intentLauncher) }
-        recyclerView.layoutManager = LinearLayoutManager(context)
+                    if (position == 0) {
+                        val recyclerView: RecyclerView = view.findViewById(R.id.newsRecycler)
+                        recyclerView.adapter = activity?.let {
+                            NewsAdapter(
+                                mutableListOf(), requireActivity(), intentLauncher
+                            )
+                        }
+                        recyclerView.layoutManager = LinearLayoutManager(context)
 
-        getNews(requireActivity()) { list ->
-            Log.d("key12", "erer")
-//            val news = News("Gf", "fg", "f", "g")
-            Log.d("key14", "erer")
-
-            val newsList = list.map {
-//                News(it.title, "Authory McAuthor", it.url, it.urlToImage ?: "")
-                News(
-                    it.title ?: "",
-                    it.author ?: "",
-                    it.url ?: "",
-                    it.publishedAt ?: "",
-                    it.urlToImage ?: "",
-                    it.description ?: ""
-                )
-
-            }
-            (recyclerView.adapter as NewsAdapter).updateData(newsList)  }
+                        getNews(requireActivity()) { list ->
 
 
+                            val newsList = list.map {
+                                News(
+                                    it.title ?: "",
+                                    it.author ?: "",
+                                    it.url ?: "",
+                                    it.publishedAt ?: "",
+                                    it.urlToImage ?: "",
+                                    it.description ?: ""
+                                )
 
+                            }
+                            (recyclerView.adapter as NewsAdapter).updateData(newsList)
+                        }
 
 
                     }
-                        if(position==1){
-                            Log.d("keyf100", "two")
-//                            val intentLauncher2 = registerForActivityResult(
-//                                ActivityResultContracts.StartActivityForResult()
-//                            ){results ->
-//
-//                            }
-//                                Log.d("keyf100","OH MAMA")
-//                                val intent = Intent(context, NewYoutubeActivity::class.java)
-//
-//                                intentLauncher2.launch(intent)
+                    if (position == 1) {
 
+                        val recyclerView: RecyclerView = view.findViewById(R.id.newsRecycler)
+                        recyclerView.adapter = activity?.let {
+                            NewsAdapter(
+                                mutableListOf(), requireActivity(), intentLauncher
+                            )
                         }
-                        if(position==2){
-                            Log.d("keyf100", "three")
+                        recyclerView.layoutManager = LinearLayoutManager(context)
+
+                        getNewsJWST(requireActivity()) { list ->
+
+
+                            val newsList = list.map {
+                                News(
+                                    it.title ?: "",
+                                    it.author ?: "",
+                                    it.url ?: "",
+                                    it.publishedAt ?: "",
+                                    it.urlToImage ?: "",
+                                    it.description ?: ""
+                                )
+
+                            }
+                            (recyclerView.adapter as NewsAdapter).updateData(newsList)
                         }
+
                     }
-
+                    if (position == 2) {
+                    }
+                }
 
 
             })
@@ -168,22 +169,13 @@ class ExploreFragment : Fragment() {
 
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ExploreFragment.
-         */
-        // TODO: Rename and change types and number of parameters
+
         @JvmStatic
-        fun newInstance(param1: String = "", param2: String = "") =
-            ExploreFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+        fun newInstance(param1: String = "", param2: String = "") = ExploreFragment().apply {
+            arguments = Bundle().apply {
+                putString(ARG_PARAM1, param1)
+                putString(ARG_PARAM2, param2)
             }
+        }
     }
 }

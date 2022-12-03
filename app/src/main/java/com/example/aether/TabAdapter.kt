@@ -16,38 +16,38 @@ import java.util.*
 class TabAdapter(
     val items: MutableList<CategoryModel>,
     val context: Context,
-    val activity : ActivityResultLauncher<Intent>
-//    val onClickListener: (View,CategoryModel) -> Unit
-//    val categoryClickInterface: CategoryClickInterface,
-) : RecyclerView.Adapter<TabAdapter.CategoryViewHolder>(){
+    val activity: ActivityResultLauncher<Intent>
 
-//    class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-//        val categorybackground : ImageView = itemView.findViewById(R.id.categoryImage)
-//        val categorytext : TextView = itemView.findViewById(R.id.textCategory)
-//    }
-    private lateinit var mListener : onItemClickListener
-    interface onItemClickListener{
-        fun onItemClick(position:Int)
-    }
-    fun setOnItemClickListener(listener : onItemClickListener){
-        mListener=listener
+) : RecyclerView.Adapter<TabAdapter.CategoryViewHolder>() {
+
+
+    private lateinit var mListener: onItemClickListener
+
+    interface onItemClickListener {
+        fun onItemClick(position: Int)
     }
 
-    class CategoryViewHolder(itemView: View,listener: onItemClickListener) : RecyclerView.ViewHolder(itemView){
-        val categorybackground : ImageView = itemView.findViewById(R.id.categoryImage)
-        val categorytext : TextView = itemView.findViewById(R.id.textCategory)
+    fun setOnItemClickListener(listener: onItemClickListener) {
+        mListener = listener
+    }
+
+    class CategoryViewHolder(itemView: View, listener: onItemClickListener) :
+        RecyclerView.ViewHolder(itemView) {
+        val categorybackground: ImageView = itemView.findViewById(R.id.categoryImage)
+        val categorytext: TextView = itemView.findViewById(R.id.textCategory)
+
         init {
-            itemView.setOnClickListener{
+            itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)
             }
         }
 
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-//        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news, parent, false)
         val view = LayoutInflater.from(parent.context).inflate(R.layout.tab_explore, parent, false)
 
-        return TabAdapter.CategoryViewHolder(view,mListener)
+        return CategoryViewHolder(view, mListener)
     }
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
@@ -56,32 +56,31 @@ class TabAdapter(
 
         Glide.with(holder.itemView.context).load(categoryModel.categoryurl)
             .into(holder.categorybackground)
-        if (position ==2){
-        val intentLauncher = activity
-        holder.categorybackground.setOnClickListener {
-            val intent = Intent(context, NewYoutubeActivity::class.java)
-            intent.putExtra("pos",position)
+        if (position == 2) {
+            val intentLauncher = activity
+            holder.categorybackground.setOnClickListener {
+                val intent = Intent(context, NewYoutubeActivity::class.java)
+                intent.putExtra("pos", position)
 
-            intentLauncher.launch(intent)
-            notifyItemChanged(position)
+                intentLauncher.launch(intent)
+                notifyItemChanged(position)
 
-            notifyDataSetChanged()}
+                notifyDataSetChanged()
+            }
         }
     }
 
     override fun getItemCount(): Int {
         return items.size
     }
-    fun updateData(newData:List<CategoryModel>) {
+
+    fun updateData(newData: List<CategoryModel>) {
         items.clear()
         items.addAll(newData)
 
-        Log.d("updateTestaaaaa", items.toString())
 
         notifyDataSetChanged()
     }
-public interface  CategoryClickInterface{
-    fun onCategoryClick(position : Int);
-}
+
 
 }

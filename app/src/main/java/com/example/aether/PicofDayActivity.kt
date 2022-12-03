@@ -17,31 +17,28 @@ class PicofDayActivity : AppCompatActivity() {
         setContentView(R.layout.activity_picof_day)
 
         val title = intent.extras?.getString("title")
-        Log.d("keyf200","the title is " + title)
 
-        val curTitle : TextView = findViewById(R.id.podTextView)
-        val curExp : TextView = findViewById(R.id.poddescTextView)
-        val curImage : ImageView = findViewById(R.id.podImageView)
+        val curTitle: TextView = findViewById(R.id.podTextView)
+        val curExp: TextView = findViewById(R.id.poddescTextView)
+        val curImage: ImageView = findViewById(R.id.podImageView)
 
         curTitle.text = title
 
-            getInfo(Activity(),"explanation") { myUrlArgument ->
-                curExp.text = myUrlArgument
+        getInfo(Activity(), "explanation") { myUrlArgument ->
+            curExp.text = myUrlArgument
+        }
+
+        getPicture(Activity()) { myUrlArgument ->
+            try {
+                Glide
+                    .with(this)
+                    .load(myUrlArgument)
+                    .centerCrop()
+                    .placeholder(R.drawable.telescope_vec)
+                    .into(curImage)
+            } catch (_: Exception) {
             }
-
-            getPicture(Activity()) { myUrlArgument->
-                try {
-                    Glide
-                        .with(this)
-                        .load(myUrlArgument)
-                        .centerCrop()
-                        .placeholder(R.drawable.telescope_vec)
-                        .into(curImage)
-                }
-                catch (_ : Exception) {}
-            }
-
-
+        }
 
 
     }
