@@ -47,7 +47,7 @@ fun getPicture(activity: Activity, callback: (url:String) -> Unit) {
     )
 }
 
-fun getInfo(activity: Activity, callback: (url:String) -> Unit) {
+fun getInfo(activity: Activity,attribute : String, callback: (url:String) -> Unit) {
     val queryUrl = "https://api.nasa.gov/planetary/apod?api_key=B4YYn2gIDEHMpsVS35Pam40CHktjee9oj3ZbJuEN"
 
 
@@ -73,13 +73,23 @@ fun getInfo(activity: Activity, callback: (url:String) -> Unit) {
                     .build()
 
                 val queryAdapter = moshi.adapter(QueryPic::class.java)
-
+                if (attribute == "title"){
                 val url = queryAdapter.fromJson(response.body?.string()!!)!!.title
 
                 activity.runOnUiThread{
                     callback(url)
                 }
-
+            } else if (attribute =="explanation"){
+                    val url = queryAdapter.fromJson(response.body?.string()!!)!!.explanation
+                    activity.runOnUiThread{
+                        callback(url)
+                    }
+            }else if (attribute =="url"){
+                    val url = queryAdapter.fromJson(response.body?.string()!!)!!.url
+                    activity.runOnUiThread{
+                        callback(url)
+                    }
+                }
 
             }
         }

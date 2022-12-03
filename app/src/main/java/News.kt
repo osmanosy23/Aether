@@ -3,5 +3,6 @@ data class News(
     val author : String,
     val url : String,
     val date: String,
-    val imageurl : String
+    val imageurl : String,
+    val description : String,
 )

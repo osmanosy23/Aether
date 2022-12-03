@@ -1,5 +1,6 @@
 package com.example.aether
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
 import getInfo
 import getPicture
@@ -39,10 +41,33 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home,container,false)
         val picofday = view.findViewById<ImageView>(R.id.myImageView)
         val pictitle : TextView = view.findViewById(R.id.titleTextView)
+
+        val intentLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ){results ->
+
+        }
+//        val intentLauncher = registerForActivityResult(
+//            ActivityResultContracts.StartActivityForResult()
+//        ){results ->
+//
+//        }
+
+        picofday.setOnClickListener {
+
+            Log.d("keyf100","OH MAMA")
+            val intent = Intent(context, PicofDayActivity::class.java)
+            intent.putExtra("title",pictitle.text)
+
+            intentLauncher.launch(intent)
+
+           }
+
         activity?.let {
             getPicture(it) { myUrlArgument->
                 try {
@@ -59,7 +84,7 @@ class HomeFragment : Fragment() {
         }
 
         activity?.let {
-            getInfo(it) { myUrlArgument ->
+            getInfo(it,"title") { myUrlArgument ->
                 pictitle.text = myUrlArgument
             }
             return view

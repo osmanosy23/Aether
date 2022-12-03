@@ -58,14 +58,15 @@
         android:id="@+id/titleTextView"
         android:layout_width="361dp"
         android:layout_height="75dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/adamina"
         android:text="@string/pictitle"
         android:textAlignment="center"
-        android:textColor="#000000"
+        android:textColor="#FF9800"
         android:textSize="25sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.58"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myImageView"
-        app:layout_constraintVertical_bias="0.139" />
+        app:layout_constraintTop_toBottomOf="@+id/myImageView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,15 +5,17 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cool_purple"
+    android:background="#443A50"
     tools:context=".ExploreFragment">
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tabRecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="@color/cool_purple"
+        android:background="#443A50"
         android:orientation="horizontal"
         android:scrollbarAlwaysDrawHorizontalTrack="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -27,17 +29,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="110dp"
-        android:background="@color/cool_purple"
+        android:background="#443A50"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/news_cell" />
 
-    <ProgressBar
-        android:id="@+id/pbLoading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
-        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

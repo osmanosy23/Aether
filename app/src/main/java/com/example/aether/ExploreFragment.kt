@@ -1,6 +1,5 @@
 package com.example.aether
 
-import ArticleQueryResult
 import News
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -11,7 +10,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import NewsAdapter
+import android.content.Intent
 import android.util.Log
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.FragmentContainer
+import androidx.fragment.app.FragmentContainerView
 import getNews
 
 // TODO: Rename parameter arguments, choose names that match
@@ -46,8 +50,16 @@ class ExploreFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_explore, container, false)
+
+        val intentLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ){results ->
+
+        }
+
+
         val recyclerView: RecyclerView = view.findViewById(R.id.newsRecycler)
-        recyclerView.adapter = NewsAdapter(mutableListOf(), requireActivity())
+        recyclerView.adapter = activity?.let { NewsAdapter(mutableListOf(), requireActivity(), intentLauncher) }
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         getNews(requireActivity()) { list ->
@@ -57,24 +69,97 @@ class ExploreFragment : Fragment() {
 
             val newsList = list.map {
 //                News(it.title, "Authory McAuthor", it.url, it.urlToImage ?: "")
-                News(it.title?:"", it.author?:"", it.url?:"", it.publishedAt?:"",it.urlToImage ?: "")
+                News(
+                    it.title ?: "",
+                    it.author ?: "",
+                    it.url ?: "",
+                    it.publishedAt ?: "",
+                    it.urlToImage ?: "",
+                    it.description ?: ""
+                )
 
             }
-
-            (recyclerView.adapter as NewsAdapter).updateData(newsList)
-
-            val categoryRV :RecyclerView = view.findViewById(R.id.tabRecycler)
-            val categoryRVModelArrayList : MutableList<CategoryModel> = ArrayList<CategoryModel>()
-            val categoryRVAdapter = context?.let { TabAdapter(categoryRVModalArrayList, it) }
-            categoryRVModelArrayList.add(CategoryModel("News",(getString(R.string.newspic))))
-            categoryRVModelArrayList.add(CategoryModel("Podcasts",(getString(R.string.podcastpic))))
-            categoryRVModelArrayList.add(CategoryModel("Videos",(getString(R.string.videospic))))
-
-            categoryRV.adapter=categoryRVAdapter
-            categoryRVAdapter?.updateData(categoryRVModelArrayList)
-
+            (recyclerView.adapter as NewsAdapter).updateData(newsList)  }
+        val intentLauncher2 = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ){results ->
 
         }
+            val categoryRV: RecyclerView = view.findViewById(R.id.tabRecycler)
+            val categoryRVModelArrayList: MutableList<CategoryModel> = ArrayList<CategoryModel>()
+            val categoryRVAdapter = context?.let { TabAdapter(categoryRVModalArrayList, it,intentLauncher2) }
+            categoryRVModelArrayList.add(CategoryModel("News", (getString(R.string.newspic))))
+            categoryRVModelArrayList.add(
+                CategoryModel(
+                    "Podcasts",
+                    (getString(R.string.podcastpic))
+                )
+            )
+            categoryRVModelArrayList.add(CategoryModel("Nasa Live", (getString(R.string.videospic))))
+
+            categoryRV.adapter = categoryRVAdapter
+            categoryRVAdapter?.updateData(categoryRVModelArrayList)
+//        Log.d("keyf100", categoryRV.toString())
+        Log.d("keyf100","bruh")
+
+        if (categoryRVAdapter != null) {
+            categoryRVAdapter.setOnItemClickListener (object : TabAdapter.onItemClickListener {
+                override fun onItemClick(position: Int) {
+                    Log.d("keyf100","tappingworks")
+
+                        if(position==0){
+                        Log.d("keyf100", "one")
+        val recyclerView: RecyclerView = view.findViewById(R.id.newsRecycler)
+        recyclerView.adapter = activity?.let { NewsAdapter(mutableListOf(), requireActivity(), intentLauncher) }
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        getNews(requireActivity()) { list ->
+            Log.d("key12", "erer")
+//            val news = News("Gf", "fg", "f", "g")
+            Log.d("key14", "erer")
+
+            val newsList = list.map {
+//                News(it.title, "Authory McAuthor", it.url, it.urlToImage ?: "")
+                News(
+                    it.title ?: "",
+                    it.author ?: "",
+                    it.url ?: "",
+                    it.publishedAt ?: "",
+                    it.urlToImage ?: "",
+                    it.description ?: ""
+                )
+
+            }
+            (recyclerView.adapter as NewsAdapter).updateData(newsList)  }
+
+
+
+
+
+                    }
+                        if(position==1){
+                            Log.d("keyf100", "two")
+//                            val intentLauncher2 = registerForActivityResult(
+//                                ActivityResultContracts.StartActivityForResult()
+//                            ){results ->
+//
+//                            }
+//                                Log.d("keyf100","OH MAMA")
+//                                val intent = Intent(context, NewYoutubeActivity::class.java)
+//
+//                                intentLauncher2.launch(intent)
+
+                        }
+                        if(position==2){
+                            Log.d("keyf100", "three")
+                        }
+                    }
+
+
+
+            })
+        }
+
 
 
         return view

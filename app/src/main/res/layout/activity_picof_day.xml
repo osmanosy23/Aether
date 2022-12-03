@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0C4181"
+    tools:context=".PicofDayActivity">
+
+
+    <!--        <ImageView-->
+    <!--            android:id="@+id/myImageView"-->
+    <!--            android:layout_width="370dp"-->
+    <!--            android:layout_height="465dp"-->
+    <!--            android:layout_marginStart="30dp"-->
+    <!--            android:layout_marginTop="112dp"-->
+    <!--            android:layout_marginEnd="30dp"-->
+    <!--            android:scaleType="fitCenter"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintHorizontal_bias="0.548"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent"-->
+    <!--            tools:srcCompat="@tools:sample/backgrounds/scenic" />-->
+
+
+    <TextView
+        android:id="@+id/poddescTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/adamina"
+        android:text="TextView"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/podImageView"
+        app:layout_constraintVertical_bias="0.146" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/podImageView"
+        android:layout_width="388dp"
+        android:layout_height="213dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="30dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/roundimageview" />
+
+    <TextView
+        android:id="@+id/podTextView"
+        android:layout_width="361dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/adamina"
+        android:text="@string/pictitle"
+        android:textAlignment="center"
+        android:textColor="#FF9800"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/podImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

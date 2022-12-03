@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewYoutubeActivity">
+
+    <androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/btnPlay"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@+id/playerview"
+    android:layout_margin="5dp"
+    android:backgroundTint="@color/gold"
+    android:fontFamily="@font/adamina"
+    android:textColor="#050505"
+    android:text = "@string/play_video"/>
+
+    <com.google.android.youtube.player.YouTubePlayerView
+        android:id="@+id/playerview"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:background="#fff"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+    </com.google.android.youtube.player.YouTubePlayerView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
