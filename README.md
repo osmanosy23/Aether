@@ -1,6 +1,6 @@
 # Aether
 
-Update: As of 12/4/22, NASA--for some bizarre reason-- thought it would be a good idea to showcase a VIDEO instead of a PICTURE for their "astronomy picture of the day", and as you may have guessed, this doesn't pair well with code designed for an actual picture. Looking at their logs, it appears that this is the second video this entire year that they've posted for their APOC, so it seems to be a rather rare event and unfortunately wasn't accounte for as a result. Nonetheless, a fix is on the way!
+Update: As of 12/4/22, NASA--for some bizarre reason-- thought it would be a good idea to showcase a VIDEO instead of a PICTURE for their "astronomy picture of the day", and as you may have guessed, this doesn't pair well with code designed for an actual picture. Looking at their logs, it appears that this is the second video this entire year that they've posted for their APOC, so it seems to be a rather rare event and unfortunately wasn't accounted for as a result. Nonetheless, a fix is on the way!
 
 - Welcome to Aether--an app for those who possess love and curiosity for space! 
 
