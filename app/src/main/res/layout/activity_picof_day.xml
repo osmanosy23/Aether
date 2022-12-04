@@ -24,19 +24,33 @@
 
 
     <TextView
+        android:id="@+id/potentialTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/adamina"
+        android:text=""
+        android:textColor="#FF9800"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toTopOf="@+id/poddescTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/podImageView" />
+
+    <TextView
         android:id="@+id/poddescTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
         android:layout_marginEnd="30dp"
         android:fontFamily="@font/adamina"
-        android:text="TextView"
+        android:text=""
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/podImageView"
+        app:layout_constraintTop_toBottomOf="@+id/potentialTextView"
         app:layout_constraintVertical_bias="0.146" />
 
     <com.google.android.material.imageview.ShapeableImageView

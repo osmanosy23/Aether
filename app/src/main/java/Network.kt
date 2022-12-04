@@ -32,7 +32,7 @@ fun getPicture(activity: Activity, callback: (url: String) -> Unit) {
                 val url = queryAdapter.fromJson(response.body?.string()!!)!!.url
 
                 activity.runOnUiThread {
-                    callback(url)
+                    callback(url!!)
                 }
 
 
@@ -67,17 +67,17 @@ fun getInfo(activity: Activity, attribute: String, callback: (url: String) -> Un
                     val url = queryAdapter.fromJson(response.body?.string()!!)!!.title
 
                     activity.runOnUiThread {
-                        callback(url)
+                        callback(url!!)
                     }
                 } else if (attribute == "explanation") {
                     val url = queryAdapter.fromJson(response.body?.string()!!)!!.explanation
                     activity.runOnUiThread {
-                        callback(url)
+                        callback(url!!)
                     }
                 } else if (attribute == "url") {
                     val url = queryAdapter.fromJson(response.body?.string()!!)!!.url
                     activity.runOnUiThread {
-                        callback(url)
+                        callback(url!!)
                     }
                 }
 
