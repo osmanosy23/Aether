@@ -11,5 +11,7 @@
 
 - This app enables one to discover all the latest news concerning events in the world of astronomy (e.g., updates from the JWST), and provides some cool 
  features that offer a chance to broaden their current scope of the world (and above)! Witness NASA's picture of the day on the home screen
- and click on it for more! Switch to the explore section to discover all the latest news in the field of astrony. Or maybe just sit back and relax and 
+ and click on it for more! Switch to the explore section to discover all the latest news in the field of astronomy! Or maybe just sit back and relax and 
  watch NASA live!
+
+- Requirements: This app contains 2 fragments alongside 5 other activities alongisde two recycler views. Utilized Glide, OkHTTP, and Moshi, as well as a handful API's (Nasa's API, NewsAPI, and YouTube's API)
